@@ -1279,7 +1279,7 @@ footer span { color: var(--lime); }
     </div>
 
     <p class="order-subtitle">
-      Pilih metode yang ingin digunakan untuk menghubungi KREXO.
+      Hubungi KREXO melalui WhatsApp untuk melakukan pemesanan.
     </p>
 
     <div class="selected-service" id="selectedService">
@@ -1294,16 +1294,8 @@ footer span { color: var(--lime); }
       </span>
     </button>
 
-    <button class="order-option" onclick="orderViaGmail()">
-      <span class="option-icon">✉</span>
-      <span>
-        <strong>Gmail</strong>
-        <small>Kirim detail pesanan melalui email</small>
-      </span>
-    </button>
-
     <p class="order-footer">
-      Dengan melanjutkan, kamu akan diarahkan ke aplikasi pilihanmu
+      Dengan melanjutkan, kamu akan diarahkan ke WhatsApp
       untuk mengirimkan permintaan pesanan.
     </p>
 
@@ -1339,14 +1331,6 @@ footer span { color: var(--lime); }
           <p>+62 814-3611-9855</p>
         </div>
       </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">✉</div>
-        <div>
-          <h4>Gmail</h4>
-          <p>yuvandleon2512@gmail.com</p>
-        </div>
-      </div>
     </div>
 
     <div class="contact-message">
@@ -1354,16 +1338,12 @@ footer span { color: var(--lime); }
       <p>
         Every great project starts with an idea.
         Let's turn your idea into something meaningful.
-        Choose how you want to contact us.
+        Contact us and let's collaborate.
       </p>
 
       <div class="contact-options">
         <button class="btn" onclick="contactWhatsApp()">
           WhatsApp ↗
-        </button>
-
-        <button class="btn" onclick="copyEmail()">
-          Copy Gmail ↗
         </button>
       </div>
     </div>
@@ -1387,7 +1367,6 @@ footer span { color: var(--lime); }
 // =====================================
 
 const PHONE = "6281436119855";
-const EMAIL = "yuvandleon2512@gmail.com";
 
 // =====================================
 // CREW DATA
@@ -1662,32 +1641,6 @@ function orderViaWhatsApp() {
 }
 
 // =====================================
-// ORDER VIA GMAIL
-// =====================================
-
-function orderViaGmail() {
-  const subject =
-    `Pemesanan Layanan KREXO - ${selectedOrderService}`;
-
-  const body =
-    `Halo KREXO!\n\n` +
-    `Saya tertarik memesan layanan berikut:\n` +
-    `${selectedOrderService}\n\n` +
-    `Saya ingin bertanya lebih lanjut mengenai harga, ` +
-    `detail pengerjaan, dan proses pemesanan.\n\n` +
-    `Terima kasih.`;
-
-  const gmailURL =
-    "mailto:" + EMAIL +
-    "?subject=" + encodeURIComponent(subject) +
-    "&body=" + encodeURIComponent(body);
-
-  window.location.href = gmailURL;
-
-  closeOrder();
-}
-
-// =====================================
 // CONTACT WHATSAPP
 // =====================================
 
@@ -1700,40 +1653,6 @@ function contactWhatsApp() {
     "?text=" + encodeURIComponent(message),
     "_blank"
   );
-}
-
-// =====================================
-// COPY GMAIL
-// =====================================
-
-function copyEmail() {
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(EMAIL)
-      .then(() => alert("Alamat Gmail berhasil disalin: " + EMAIL))
-      .catch(() => fallbackCopyEmail());
-  } else {
-    fallbackCopyEmail();
-  }
-}
-
-function fallbackCopyEmail() {
-  const textArea = document.createElement("textarea");
-
-  textArea.value = EMAIL;
-  textArea.style.position = "fixed";
-  textArea.style.opacity = "0";
-
-  document.body.appendChild(textArea);
-  textArea.select();
-
-  try {
-    document.execCommand("copy");
-    alert("Alamat Gmail berhasil disalin: " + EMAIL);
-  } catch (error) {
-    alert("Silakan salin email secara manual: " + EMAIL);
-  }
-
-  document.body.removeChild(textArea);
 }
 
 // =====================================
@@ -1755,6 +1674,7 @@ function revealElements() {
   const elements = document.querySelectorAll(
     '.page.active .service-card, ' +
     '.page.active .catalog-card, ' +
+    '.page.active .crew-card, ' +
     '.page.active .stat'
   );
 
